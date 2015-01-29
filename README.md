@@ -13,7 +13,7 @@ retries: [500, 2000, 4000]
 ```
 
 #### abortPrevious
-Boolean specifying whether previous unfinished ajax requests under the same namespace should be aborted when a new request under the same namespace is initialized.
+Boolean specifying whether previous unfinished ajax requests under the same namespace should be aborted before initializing this request.
 ```coffeescript
 abortPrevious: true
 ```
