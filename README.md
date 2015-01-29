@@ -1,7 +1,22 @@
 # jQuery-Ajax-with-retries-and-abort
 Wrapper that enables custom number of retries with retry callback and/or aborting previous unfinished requests
 
-## Usage:
+
+## Usage
+Adds several properties (retries, abortPrevious, namespace) and one callback (retry) to jQuery.ajax options object
+
+#### retries
+An array specifying how many times and how long to wait between failed requests. Each error unshifts value from array.
+If you want the request to fail after first error, set this property to false
+
+#### abortPrevious
+Boolean specifying whether previous unfinished ajax requests under the same namespace should be aborted when a new request under the same namespace is initialized.
+
+#### retry
+This callback function triggers on error if the retries array isn't empty
+
+
+## Example
 
     $._ajaxWithRetryAbort
 
@@ -10,12 +25,13 @@ Wrapper that enables custom number of retries with retry callback and/or abortin
 
         retries: [1000, 5000] # default is [500, 2000, 4000], if you don't want retries then false
         abortPrevious: true # default is true
+        namespace: "something" # not necessary if abortPrevious: false
 
         retry: (request, status, error) ->
-          console.log "Retrying..."
+          console.log "Error! Retrying..."
 
         error: (request, status, error) ->
-          console.log "No retries left, failed."
+          console.log "Error! No retries left, failed."
 
         success: (data, status, request) ->
           console.log "Success!"
